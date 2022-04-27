@@ -1,5 +1,5 @@
 from datetime import date
-from datetime import datetime
+from utils.helper import date_para_str
 
 class Cliente:
     codigo: int = 100
@@ -9,13 +9,14 @@ class Cliente:
         self.__email: str = email
         self.__cpf: str = cpf
         self.__data_nascimento: str = data_nascimento
-        self.__codigo: int = Cliente.codigo
-        self.__cadastro: date = datetime.today()
+        self.__codigo: int = int(Cliente.codigo)
+        self.__cadastro: date = date.today()
         Cliente.codigo += 1
     
     @property
     def nome(self: object) -> str:
         return self.__nome
+    
     
     @property
     def email(self: object) -> str:
@@ -30,9 +31,11 @@ class Cliente:
         return self.__data_nascimento
     
     @property
-    def cadastro(self: object) -> datetime:
-        return self.__cadastro
+    def cadastro(self: object) -> date:
+        return date_para_str(self.__cadastro)
+    
     
     def __str__(self: object) -> str:
-        return f'Código: {self.__codigo} \nNome: {self.nome} \nE-mail: {self.email} \nCPF: {self.cpf} \n'\
+        return f'Nome: {self.nome} \nE-mail: {self.email} \n'\
             f'Data de nascimento: {self.data_nascimento} \nCadastro: {self.cadastro}'
+    

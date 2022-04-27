@@ -1,4 +1,5 @@
 from models.cliente import Cliente
+from models.agencia import Agencia
 
 class Conta:
     codigo = 000
@@ -7,7 +8,7 @@ class Conta:
         self.__saldo: float = 0.0
         self.__limite: float = 100.0
         self.__saldo_total:float = self._calcula_saldo_total
-        self.__codigo: int = int(Conta.codigo)
+        self.__codigo: int = Conta.codigo
         Conta.codigo += 1
         
     @property
