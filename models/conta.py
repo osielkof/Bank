@@ -57,5 +57,5 @@ class Conta:
     
     
     def __str__(self: object) -> str:
-        return f'Nome: {self.cliente.nome} \nConta: {self.codigo} \nSaldo: {self.saldo} \nLimite: {self.limite}'
+        return f'Nome: {self.cliente.nome} \nConta: {self.__codigo} \nSaldo: {self.saldo} \nLimite: {self.limite}'
  
