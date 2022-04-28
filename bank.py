@@ -4,9 +4,67 @@ from models.cliente import Cliente
 from models.conta import Conta
 
 from typing import List
+from time import sleep
 
 contas: List[Conta] = []
 agencias: List[Agencia] = []
+
+
+def main() -> None:
+    menu()
+    
+def menu() -> None:
+    print('================================')
+    print('============  BANK  ============')
+    print('================================')
+    print('Informe a opção desejada')
+    print('1 - Criar Agencia')
+    print('2 - Criar Conta')
+    print('3 - Saque')
+    print('4 - Depósito')
+    print('5 - Transferência')
+    print('6 - Listar Contas')
+    print('7 - Listar Agencias')
+    print('8 - Sair do Programa')
+    opcao = int(input())
+    
+
+    if opcao == 1:
+        criar_agencia()
+    elif opcao == 2:
+        criar_conta()
+    elif opcao == 3:
+        efetuar_saque()
+    elif opcao == 4:
+        efetuar_deposito()
+    elif opcao == 5:
+        efetuar_transferencia
+    elif opcao == 6:
+        listar_contas()
+    elif opcao == 7:
+        listar_agencias()
+    elif opcao == 8:
+        print('Volte Sempre!')
+        sleep(2)
+        exit(0)
+    else:
+        print('Opção inválida. Tente novamente.')
+        sleep(2)
+        menu()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 def criar_agencia() -> None:
@@ -14,12 +72,13 @@ def criar_agencia() -> None:
     agencia: Agencia = Agencia(nome)
     agencias.append(agencia)
     print('Agência criada com sucesso!')
-     
-
-    
+    print(agencia)
+    sleep(2)
+    menu()
 
 def criar_conta() -> None:
-    print('Informe os dados do cliente: ')
+    print('Informe os dados do cliente ')
+    print('----------------------------')
     nome: str = input('Nome do cliente: ')
     cpf: str = input('CPF do cliente: ')
     email: str = input('E-mail do cliente: ')
@@ -29,12 +88,18 @@ def criar_conta() -> None:
     conta: Conta = Conta(cliente)
     
     contas.append(conta)
+    print('Conta criada com sucesso!')
     
+    sleep(2)
+    menu()
 
 def efetuar_saque(valor: float) -> None:
     pass
 
 def efetuar_deposito(valor: float) -> None:
+    pass
+
+def efetuar_transferencia(valor: float, destino: object) -> None:
     pass
 
 def listar_contas() -> None:
@@ -56,3 +121,7 @@ def listar_agencias() -> None:
         print('-------------------------')
     else:
         print('Não existem agências cadastradas.')
+
+
+if __name__ == "__main__":
+    main()
