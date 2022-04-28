@@ -28,7 +28,6 @@ def menu() -> None:
     print('8 - Sair do Programa')
     opcao = int(input())
     
-
     if opcao == 1:
         criar_agencia()
     elif opcao == 2:
@@ -52,21 +51,6 @@ def menu() -> None:
         sleep(2)
         menu()
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 def criar_agencia() -> None:
     nome: str = input('Informe o nome da nova agência: ')
     agencia: Agencia = Agencia(nome)
@@ -77,20 +61,29 @@ def criar_agencia() -> None:
     menu()
 
 def criar_conta() -> None:
-    print('Informe os dados do cliente ')
-    print('----------------------------')
-    nome: str = input('Nome do cliente: ')
-    cpf: str = input('CPF do cliente: ')
-    email: str = input('E-mail do cliente: ')
-    data_nascimento: date = input('Data de nascimento do cliente: ')
-    
-    cliente: Cliente = Cliente(nome, email, cpf, data_nascimento)
-    conta: Conta = Conta(cliente)
-    
-    contas.append(conta)
-    print('Conta criada com sucesso!')
-    
-    sleep(2)
+    if len(agencias) > 0:
+        print('Informe os dados do cliente ')
+        print('----------------------------')
+        nome: str = input('Nome do cliente: ')
+        cpf: str = input('CPF do cliente: ')
+        email: str = input('E-mail do cliente: ')
+        data_nascimento: date = input('Data de nascimento do cliente: ')
+        agencia : Agencia.nome = input('Informe o nome da agência:')
+        for agencia in agencias:
+            if agencia in agencias:
+                cliente: Cliente = Cliente(nome, email, cpf, data_nascimento)
+                conta: Conta = Conta(cliente)
+                contas.append(conta)
+                print('Conta criada com sucesso!')
+                print('Dados da conta')
+                print('------------------------')
+                print(conta)
+                print('------------------------')
+            else:
+               print(f'A agência {agencia} não está cadastrada.')   
+    else:
+        print('Não existem agências cadastradas. \nNecessário cadastrar agencia para abrir uma conta.')
+    sleep(5)
     menu()
 
 def efetuar_saque(valor: float) -> None:
@@ -116,11 +109,14 @@ def listar_agencias() -> None:
     if len(agencias) > 0:
         print('Lista de agências')
         for agencia in agencias:
+            sleep(1)
             print('-------------------------')
             print(agencia)
         print('-------------------------')
     else:
         print('Não existem agências cadastradas.')
+    sleep(2)
+    menu()
 
 
 if __name__ == "__main__":
