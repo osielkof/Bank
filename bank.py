@@ -19,9 +19,9 @@ def criar_agencia() -> None:
     
 
 def criar_conta() -> None:
-    print('Informe os dados do cliente')
+    print('Informe os dados do cliente: ')
     nome: str = input('Nome do cliente: ')
-    cpf: str = input('CPF do cliente')
+    cpf: str = input('CPF do cliente: ')
     email: str = input('E-mail do cliente: ')
     data_nascimento: date = input('Data de nascimento do cliente: ')
     

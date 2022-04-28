@@ -2,13 +2,16 @@ from models.cliente import Cliente
 from models.agencia import Agencia
 
 class Conta:
-    codigo = 000
+    
+    codigo: int = 10
+    
     def __init__(self: object, cliente: Cliente) -> None:
         self.__cliente: Cliente = Cliente
         self.__saldo: float = 0.0
         self.__limite: float = 100.0
         self.__saldo_total:float = self._calcula_saldo_total
-        self.__codigo: int = Conta.codigo
+        self.__codigo: int = int(Conta.codigo)
+        self.__agencia: Agencia = Agencia.codigo
         Conta.codigo += 1
         
     @property
@@ -39,11 +42,7 @@ class Conta:
     def _calcula_saldo_total(self: object) -> float:
         return self.saldo + self.limite
     
-    @property
-    def codigo(self: object) -> int:
-        return self.__codigo
-
-    
+        
     def depositar(self: object, valor: float) -> None:
         pass
     

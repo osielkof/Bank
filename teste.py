@@ -12,10 +12,10 @@ from bank import criar_conta
 
 agencia1: Agencia = Agencia('Tatuapé')
 
-cli1: Cliente = Cliente('João da Silva', 'joaosilva@gmail.com', '123.456.789-01', '25/04/1994')
+#cli1: Cliente = Cliente('João da Silva', 'joaosilva@gmail.com', '123.456.789-01', '25/04/1994')
 criar_conta()
 
 #print(agencia1)
-print(cli1)
+#print(cli1)
 
 
