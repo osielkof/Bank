@@ -16,8 +16,7 @@ class Cliente:
     @property
     def nome(self: object) -> str:
         return self.__nome
-    
-    
+        
     @property
     def email(self: object) -> str:
         return self.__email
@@ -36,6 +35,5 @@ class Cliente:
     
     
     def __str__(self: object) -> str:
-        return f'Nome: {self.nome} \nE-mail: {self.email} \n'\
-            f'Data de nascimento: {self.data_nascimento} \nCadastro: {self.cadastro}'
+        return f'Nome: {self.nome} \nE-mail: {self.email} \nData de nascimento: {self.data_nascimento} \nCadastro: {self.cadastro}'
     

@@ -6,14 +6,13 @@ class Conta:
     codigo: int = 10
     
     def __init__(self: object, cliente: Cliente) -> None:
-        self.__cliente: Cliente = Cliente
+        self.__cliente: Cliente = cliente
         self.__saldo: float = 0.0
         self.__limite: float = 100.0
         self.__saldo_total:float = self._calcula_saldo_total
         self.__codigo: int = int(Conta.codigo)
-        self.__agencia: Agencia = Agencia.codigo
         Conta.codigo += 1
-        
+    
     @property
     def saldo(self: object) -> float:
         return self.__saldo
@@ -39,6 +38,10 @@ class Conta:
         self.__saldo_total = valor
         
     @property
+    def cliente(self: object) -> Cliente:
+        return self.__cliente
+        
+    @property
     def _calcula_saldo_total(self: object) -> float:
         return self.saldo + self.limite
     
@@ -54,5 +57,5 @@ class Conta:
     
     
     def __str__(self: object) -> str:
-        return f'Nome: {Cliente.nome} \nConta: {self.codigo} \nSaldo: {self.saldo} Limite: {self.limite}'
+        return f'Nome: {self.cliente.nome} \nConta: {self.codigo} \nSaldo: {self.saldo} \nLimite: {self.limite}'
  
