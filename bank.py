@@ -1,8 +1,8 @@
-from datetime import date
 from models.agencia import Agencia
 from models.cliente import Cliente
 from models.conta import Conta
 
+from datetime import date
 from typing import List
 from time import sleep
 
@@ -57,12 +57,11 @@ def criar_agencia() -> None:
     agencias.append(agencia)
     print('Agência criada com sucesso!')
     print(agencia)
-    sleep(2)
+    sleep(3)
     menu()
 
 def criar_conta() -> None:
     if len(agencias) > 0:
-        
         print('Informe os dados do cliente ')
         print('----------------------------')
         
@@ -85,37 +84,59 @@ def criar_conta() -> None:
             else:
                print(f'A agência {agencia} não está cadastrada.')   
     else:
-        print('Não existem agências cadastradas. \nNecessário cadastrar agencia para abrir uma conta.')
+        print('Não existem agências cadastradas')
+        print('Cadastre uma agencia para abrir uma conta')
     sleep(5)
     menu()
 
-def efetuar_saque(valor: float) -> None:
-    pass
+def efetuar_saque() -> None:
+    if len(agencias) >0:
+        print('------------------------------')
+        codigo: int = int(input('Número da agencia: '))
+        agencia: Agencia = buscar_agencia_por_numero(codigo)
+        
+        if agencia:
+            if len(contas) > 0:
+                print('------------------------------')
+                codigo: int = int(input('Número da conta: '))
+                conta: Conta = buscar_conta_por_numero(codigo)
+                
+                if conta:
+                    valor: int = int(input('Valor do saque: '))
+                    print('------------------------------')
+                    conta.sacar(valor)
+                else:
+                    print('Conta não encontrada')
+                
+            else:
+                print('Não existem contas cadastradas')
+        else:
+            print('Agência não encontrada')
+            
+    else:
+        print('Não existem agencias cadastradas')
+    sleep(2)
+    menu()
 
 def efetuar_deposito() -> None:
     if len(agencias) > 0:
-        
-        codigo: int = int(input('Informe a agência: '))
+        codigo: int = int(input('Código da agência: '))
         agencia: Agencia = buscar_agencia_por_numero(codigo)
     
         if agencia:
-            
             if len(contas) > 0:
-                codigo: int = int(input('Informe a conta: '))
+                codigo: int = int(input('Número da conta: '))
                 conta: Conta = buscar_conta_por_numero(codigo)
                 
                 if conta:
                     valor: float = float(input('Valor do depósito: '))
                     conta.depositar(valor)
                 else:
-                    print('Conta não encontrada')
-                
+                    print('Conta não encontrada')   
             else:
-                print('Não há contas cadastradas')
-                
+                print('Não há contas cadastradas')        
         else:
             print('Agencia não encontrada')
-      
       
     else:
         print('Não há agencias cadastradas')

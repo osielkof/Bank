@@ -32,8 +32,6 @@ class Cliente:
     @property
     def cadastro(self: object) -> date:
         return date_para_str(self.__cadastro)
-    
-    
+        
     def __str__(self: object) -> str:
         return f'Nome: {self.nome} \nE-mail: {self.email} \nData de nascimento: {self.data_nascimento} \nCadastro: {self.cadastro}'
-    

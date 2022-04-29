@@ -1,5 +1,5 @@
 from models.cliente import Cliente
-from models.agencia import Agencia
+
 
 class Conta:
     
@@ -59,7 +59,27 @@ class Conta:
         
     
     def sacar(self: object, valor: float) -> None:
-        pass
+        
+        restante = 0
+        self.saldo_total = self._calcula_saldo_total
+        
+        if valor > 0:
+            if self.saldo_total >= valor:
+                
+                if self.saldo >= valor:
+                    self.saldo -= valor
+                    self.saldo_total = self._calcula_saldo_total            
+                else:
+                    self.saldo -= valor
+                    restante = self.saldo
+                    self.saldo = 0
+                    self.limite += restante
+                    self.saldo_total = self._calcula_saldo_total
+                print('Saque efetuado com sucesso')
+            else:
+                print('Saldo insuficiente')
+        else:
+            print('Valor inválido')
     
     def transferir(self: object, destino: object, valor: float) -> None:
         pass
