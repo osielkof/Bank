@@ -3,15 +3,15 @@ from models.agencia import Agencia
 
 class Conta:
     
-    codigo: int = 10
+    numero: int = 1010
     
     def __init__(self: object, cliente: Cliente) -> None:
         self.__cliente: Cliente = cliente
         self.__saldo: float = 0.0
         self.__limite: float = 100.0
         self.__saldo_total:float = self._calcula_saldo_total
-        self.__codigo: int = int(Conta.codigo)
-        Conta.codigo += 1
+        self.__codigo: int = int(Conta.numero)
+        Conta.numero += 1
     
     @property
     def saldo(self: object) -> float:
@@ -40,14 +40,23 @@ class Conta:
     @property
     def cliente(self: object) -> Cliente:
         return self.__cliente
-        
+    
     @property
     def _calcula_saldo_total(self: object) -> float:
         return self.saldo + self.limite
     
-        
+    @property
+    def codigo(self: object) -> int:
+        return self.__codigo    
+    
     def depositar(self: object, valor: float) -> None:
-        pass
+        if valor > 0:
+            self.saldo += valor
+            self.saldo_total = self._calcula_saldo_total
+            print('Depósito efetuado com sucesso!')
+        else:
+            print('Erro ao efetuar depósito. Tente novamente')
+        
     
     def sacar(self: object, valor: float) -> None:
         pass

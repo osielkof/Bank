@@ -22,5 +22,3 @@ class Agencia:
     def numero(self: object) -> int:
         return self.__numero
  
-                
-    

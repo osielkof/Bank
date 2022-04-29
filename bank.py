@@ -62,13 +62,16 @@ def criar_agencia() -> None:
 
 def criar_conta() -> None:
     if len(agencias) > 0:
+        
         print('Informe os dados do cliente ')
         print('----------------------------')
+        
         nome: str = input('Nome do cliente: ')
         cpf: str = input('CPF do cliente: ')
         email: str = input('E-mail do cliente: ')
         data_nascimento: date = input('Data de nascimento do cliente: ')
         agencia : Agencia.nome = input('Informe o nome da agência:')
+        
         for agencia in agencias:
             if agencia in agencias:
                 cliente: Cliente = Cliente(nome, email, cpf, data_nascimento)
@@ -89,8 +92,35 @@ def criar_conta() -> None:
 def efetuar_saque(valor: float) -> None:
     pass
 
-def efetuar_deposito(valor: float) -> None:
-    pass
+def efetuar_deposito() -> None:
+    if len(agencias) > 0:
+        
+        codigo: int = int(input('Informe a agência: '))
+        agencia: Agencia = buscar_agencia_por_numero(codigo)
+    
+        if agencia:
+            
+            if len(contas) > 0:
+                codigo: int = int(input('Informe a conta: '))
+                conta: Conta = buscar_conta_por_numero(codigo)
+                
+                if conta:
+                    valor: float = float(input('Valor do depósito: '))
+                    conta.depositar(valor)
+                else:
+                    print('Conta não encontrada')
+                
+            else:
+                print('Não há contas cadastradas')
+                
+        else:
+            print('Agencia não encontrada')
+      
+      
+    else:
+        print('Não há agencias cadastradas')
+    sleep(2)
+    menu()
 
 def efetuar_transferencia(valor: float, destino: object) -> None:
     pass
@@ -104,6 +134,8 @@ def listar_contas() -> None:
         print('----------------------')
     else:
         print('Não existem contas cadastradas')
+    sleep(2)
+    menu()
 
 def listar_agencias() -> None:
     if len(agencias) > 0:
@@ -118,6 +150,25 @@ def listar_agencias() -> None:
     sleep(2)
     menu()
 
+
+def buscar_conta_por_numero(numero: int) -> Conta:
+    c: Conta = None
+    
+    if len(contas) > 0:
+        for conta in contas:
+            if conta.codigo == numero:
+                c = conta
+    return c
+
+def buscar_agencia_por_numero(numero: int) -> Agencia:
+    a: Agencia = None
+    
+    if len(agencias) > 0:
+        for agencia in agencias:
+            if agencia.numero == numero:
+                a = agencia
+    return a 
+    
 
 if __name__ == "__main__":
     main()
