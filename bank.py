@@ -1,3 +1,4 @@
+from imaplib import Int2AP
 from models.agencia import Agencia
 from models.cliente import Cliente
 from models.conta import Conta
@@ -37,7 +38,7 @@ def menu() -> None:
     elif opcao == 4:
         efetuar_deposito()
     elif opcao == 5:
-        efetuar_transferencia
+        efetuar_transferencia()
     elif opcao == 6:
         listar_contas()
     elif opcao == 7:
@@ -69,7 +70,8 @@ def criar_conta() -> None:
         cpf: str = input('CPF do cliente: ')
         email: str = input('E-mail do cliente: ')
         data_nascimento: date = input('Data de nascimento do cliente: ')
-        agencia : Agencia.nome = input('Informe o nome da agência:')
+        agencia : Agencia.nome = input('Informe o nome da agência: ')
+        
         
         for agencia in agencias:
             if agencia in agencias:
@@ -81,6 +83,8 @@ def criar_conta() -> None:
                 print('------------------------')
                 print(conta)
                 print('------------------------')
+                break
+                
             else:
                print(f'A agência {agencia} não está cadastrada.')   
     else:
@@ -143,8 +147,39 @@ def efetuar_deposito() -> None:
     sleep(2)
     menu()
 
-def efetuar_transferencia(valor: float, destino: object) -> None:
-    pass
+def efetuar_transferencia() -> None:
+    if len(agencias) > 0:
+        cod_origem: int = int(input('Informe o código da sua agência: '))
+        ag_origem: Agencia = buscar_agencia_por_numero(cod_origem)
+        
+        cod_destino: int = int(input('Informe o código da agencia destino: '))
+        ag_destino: Agencia = buscar_agencia_por_numero(cod_destino)
+        
+        if ag_origem:
+            if ag_destino:
+                cont_origem: int = int(input('Informe o número da sua conta: '))
+                conta_origem: Conta = buscar_conta_por_numero(cont_origem)
+                
+                cont_destino: int = int(input('Informe o número da conta destino: '))
+                conta_destino: Conta = buscar_conta_por_numero(cont_destino)
+                
+                if conta_origem:
+                    if conta_destino:
+                        valor: float = float(input('Informe o valor da transferência: '))
+                        conta_origem.transferir(conta_destino, valor)
+                    else:
+                        print('Conta destino não encontrada')
+                else:
+                    print('Sua conta não foi encontrada')
+            else:
+                print('Agênca de destino não encontrada')
+        else:
+            print('Sua agência não foi encontrada')
+    else:
+        print('Nenhuma agência cadastrada')
+    sleep(2)
+    menu()
+    
 
 def listar_contas() -> None:
     if len(contas) > 0:
@@ -170,7 +205,6 @@ def listar_agencias() -> None:
         print('Não existem agências cadastradas.')
     sleep(2)
     menu()
-
 
 def buscar_conta_por_numero(numero: int) -> Conta:
     c: Conta = None

@@ -82,7 +82,25 @@ class Conta:
             print('Valor inválido')
     
     def transferir(self: object, destino: object, valor: float) -> None:
-        pass
+        restante: float = 0.0
+        if valor > 0:
+            if self.saldo_total >= valor:
+                if self.saldo >= valor:
+                    self.saldo -= valor
+                    self.saldo_total = self._calcula_saldo_total
+                    destino.saldo += valor
+                else:
+                    self.saldo -= valor
+                    restante = self.saldo
+                    self.saldo = 0
+                    self.limite += restante
+                    destino.saldo += valor
+                print('Transferência bem sucedida')
+            else:
+                print('Saldo insuficiente')
+        else:
+            print('Valor inválido')
+        
     
     
     def __str__(self: object) -> str:
