@@ -1,4 +1,3 @@
-from imaplib import Int2AP
 from models.agencia import Agencia
 from models.cliente import Cliente
 from models.conta import Conta
