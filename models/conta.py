@@ -1,3 +1,4 @@
+import doctest
 from models.cliente import Cliente
 
 
@@ -50,6 +51,13 @@ class Conta:
         return self.__codigo    
     
     def depositar(self: object, valor: float) -> None:
+        """Função que adicionar o valor à conta de destino, caso o valor seja maior que 0.
+        Caso contrário retorna erro.
+
+        Returns:
+            None: A função não retorna valor.
+            Apenas informa se o depósito foi bem sucessido ou não.
+        """
         if valor > 0:
             self.saldo += valor
             self.saldo_total = self._calcula_saldo_total
@@ -59,7 +67,14 @@ class Conta:
         
     
     def sacar(self: object, valor: float) -> None:
+        """Função que saca o valor solicitado, mas verifica se o saldo total é suficiente.
+        Será utilizado o saldo em conta e o limite caso o saldo em conta não seja 
+        suficiente.
         
+        Returns:
+            None: A função não retorna valor.
+            Apenas informa se o saque foi bem sucessido ou não.
+        """
         restante = 0
         self.saldo_total = self._calcula_saldo_total
         
@@ -82,6 +97,14 @@ class Conta:
             print('Valor inválido')
     
     def transferir(self: object, destino: object, valor: float) -> None:
+        """Faz a transferência de uma conta para outra, desde que estejam cadastradas.
+        A função verifica se a conta de origem possui o valor solicitado, utilizando tanto
+        o saldo como o limite, e verifica se o valor é um número válido.
+        
+        Returns:
+            None: A função não retorna valor.
+            Apenas informa se a transferência foi bem sucessido ou não.
+        """
         restante: float = 0.0
         if valor > 0:
             if self.saldo_total >= valor:
